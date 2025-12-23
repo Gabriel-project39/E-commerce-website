@@ -1410,24 +1410,3 @@ a.footer-link:is(:hover, :focus) { color: var(--bittersweet); }
   color: white;
 }
 
-.social-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.social-link-list {
-  display: flex;
-  gap: 25px;
-  justify-content: flex-start;
-}
-
-.social-link {
-  color: white;
-  font-size: 24px;
-  transition: 0.3s ease;
-}
-
-.social-link:hover {
-  color: var(--secondary-color);
-}
