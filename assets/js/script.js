@@ -82,29 +82,28 @@ function updateGreeting() {
 }
 
 // dark mode 
-document.addEventListener('DOMContentLoaded', () => {
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const body = document.body;
+const toggleBtn = document.getElementById("mode-toggle");
+const body = document.body;
 
-    if (!themeToggleBtn) return;
+toggleBtn.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+    body.classList.toggle("light-mode");
 
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-mode');
-        themeToggleBtn.classList.remove('fa-moon');
-        themeToggleBtn.classList.add('fa-sun');
+    if (body.classList.contains("dark-mode")) {
+        toggleBtn.textContent = "🌙"; // Dark mode
+    } else {
+        toggleBtn.textContent = "🌞"; // Light mode
     }
-
-    themeToggleBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-
-        if (body.classList.contains('dark-mode')) {
-            themeToggleBtn.classList.remove('fa-moon');
-            themeToggleBtn.classList.add('fa-sun');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            themeToggleBtn.classList.remove('fa-sun');
-            themeToggleBtn.classList.add('fa-moon');
-            localStorage.setItem('theme', 'light');
-        }
-    });
 });
+let currentIndex = 0;
+const slides = document.querySelector('.swiper-slides');
+const totalSlides = document.querySelectorAll('.image-slide').length;
+
+function showSlide(index, animate = true) {
+  if (animate) {
+    slides.style.transition = 'transform 1s ease-in-out';
+  } else {
+    slides.style.transition = 'none';
+  }
+  slides.style.transform = `translateX(-${index * 100}vw)`;
+}
