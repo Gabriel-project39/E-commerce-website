@@ -95,15 +95,3 @@ toggleBtn.addEventListener("click", () => {
         toggleBtn.textContent = "🌞"; // Light mode
     }
 });
-let currentIndex = 0;
-const slides = document.querySelector('.swiper-slides');
-const totalSlides = document.querySelectorAll('.image-slide').length;
-
-function showSlide(index, animate = true) {
-  if (animate) {
-    slides.style.transition = 'transform 1s ease-in-out';
-  } else {
-    slides.style.transition = 'none';
-  }
-  slides.style.transform = `translateX(-${index * 100}vw)`;
-}
