@@ -69,23 +69,6 @@ document.getElementById('email').addEventListener('input', (e) => {
     }
 });
 
-// ii. Shopping cart
-let cart = { items: 0, total: 0 };
-
-document.querySelectorAll('.add-to-cart').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const price = parseInt(e.target.dataset.price);
-        cart.items++;
-        cart.total += price;
-        
-        document.getElementById('cart-count').textContent = cart.items;
-        document.getElementById('cart-total').textContent = cart.total;
-        
-        e.target.textContent = 'Added!';
-        setTimeout(() => e.target.textContent = `Add to Cart ($${price})`, 1000);
-    });
-});
-
 // iii & iv. Greeting, date, and theme (from previous)
 function updateGreeting() {
     const now = new Date();
@@ -102,19 +85,32 @@ const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 
 function setTheme(theme) {
-    html.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+        html.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️'; // Sun for light mode
+    } else {
+        html.setAttribute('data-theme', 'light');
+        themeToggle.textContent = '🌙'; // Moon for dark mode
+    }
     localStorage.setItem('theme', theme);
-    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
 }
 
 function initTheme() {
-    const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    setTheme(saved);
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const themeToUse = saved || (prefersDark ? 'dark' : 'light');
+    setTheme(themeToUse);
 }
 
 themeToggle.addEventListener('click', () => {
-    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    const currentTheme = html.getAttribute('data-theme') || 'light';
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
 });
+
+// Initialize everything
+updateGreeting();
+initTheme();
+
 
 // Initialize everything
 updateGreeting();
