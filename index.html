@@ -77,7 +77,10 @@
             <a href="a href="Contact.html" class="navbar-link">Contact</a>
           </li>
 
+           <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+
         </ul>
+        
 
         <ul class="nav-action-list">
 
@@ -135,6 +138,12 @@
         - #HERO
       -->
 
+         <header class="greeting-section">
+        <div id="greeting"></div>
+        <div id="current-date"></div>
+    </header>
+    
+
       <section class="section hero" style="background-image: url('./assets/images/hero-banner.png')">
         <div class="container">
 
@@ -142,10 +151,7 @@
             New Summer <strong>Shoes Collection</strong>
           </h2>
 
-      <header class="greeting-section">
-        <div id="greeting"></div>
-        <div id="current-date"></div>
-    </header>
+      
   
           
           <p class="hero-text">
@@ -1380,7 +1386,13 @@ Step forward with Footcap.
                 <span class="footer-link-text">+557343673257</span>
               </a>
             </li>
-
+            
+           <form id="contact-form" class="form-section">
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <span id="email-error" class="error"></span>
+        <button type="submit">Submit</button>
+       </form>
+    
             <li>
               <a href="mailto:footcap@help.com" class="footer-link">
                 <ion-icon name="mail"></ion-icon>
