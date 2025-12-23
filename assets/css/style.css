@@ -1391,7 +1391,7 @@ a.footer-link:is(:hover, :focus) { color: var(--bittersweet); }
   text-transform: uppercase;
   display: inline-block;
   position: relative;
-  color: white; /* or your preferred text color */
+  color: black; /* or your preferred text color */
 }
 
 .section-title::after {
