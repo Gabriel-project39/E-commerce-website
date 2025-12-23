@@ -1368,7 +1368,7 @@ a.footer-link:is(:hover, :focus) { color: var(--bittersweet); }
   width: 400px;
   height: 400px;
   object-fit: cover;
-  transform: translateY(-20px); /* Moves image up 20px */
+  transform: translateY(-10px); /* Moves image up 20px */
 }
 
   border-radius: var(--border-radius-circle);
@@ -1409,6 +1409,6 @@ a.footer-link:is(:hover, :focus) { color: var(--bittersweet); }
   font-size: var(--font-size);
   line-height: 1.6;
   margin-bottom: 20px;
-  color: white;
+  color: black;
 }
 
