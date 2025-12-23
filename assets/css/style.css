@@ -357,7 +357,13 @@ body {
 
 .btn-link:is(:hover, :focus) { border-color: transparent; }
 
-
+.greeting-section {
+    background: var(--greeting-bg);
+    padding: 2rem;
+    text-align: center;
+    margin: 2rem;
+    border-radius: 10px;
+}
 
 
 
