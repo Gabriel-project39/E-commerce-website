@@ -39,6 +39,7 @@ window.addEventListener("scroll", function () {
   }
 });
 
+
 // i. Form validation
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -69,6 +70,23 @@ document.getElementById('email').addEventListener('input', (e) => {
     }
 });
 
+// ii. Shopping cart
+let cart = { items: 0, total: 0 };
+
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const price = parseInt(e.target.dataset.price);
+        cart.items++;
+        cart.total += price;
+        
+        document.getElementById('cart-count').textContent = cart.items;
+        document.getElementById('cart-total').textContent = cart.total;
+        
+        e.target.textContent = 'Added!';
+        setTimeout(() => e.target.textContent = `Add to Cart ($${price})`, 1000);
+    });
+});
+
 // iii & iv. Greeting, date, and theme (from previous)
 function updateGreeting() {
     const now = new Date();
@@ -81,17 +99,24 @@ function updateGreeting() {
     });
 }
 
-// dark mode 
-const toggleBtn = document.getElementById("mode-toggle");
-const body = document.body;
+const themeToggle = document.getElementById('theme-toggle');
+const html = document.documentElement;
 
-toggleBtn.addEventListener("click", () => {
-    body.classList.toggle("dark-mode");
-    body.classList.toggle("light-mode");
+function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
 
-    if (body.classList.contains("dark-mode")) {
-        toggleBtn.textContent = "🌙"; // Dark mode
-    } else {
-        toggleBtn.textContent = "🌞"; // Light mode
-    }
+function initTheme() {
+    const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(saved);
+}
+
+themeToggle.addEventListener('click', () => {
+    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 });
+
+// Initialize everything
+updateGreeting();
+initTheme();
