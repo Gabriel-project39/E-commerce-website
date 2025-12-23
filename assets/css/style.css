@@ -1350,7 +1350,7 @@ a.footer-link:is(:hover, :focus) { color: var(--bittersweet); }
 }
 
 .about-section {
-  padding: 120px 80px;
+  padding: 12px 80px;
   background: #000;
   display: flex;
   gap: 50px;
