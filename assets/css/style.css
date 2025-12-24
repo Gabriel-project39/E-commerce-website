@@ -365,6 +365,7 @@ body {
 .greeting-section {
     @extend .card;
     text-align: center;
+  color: black;
 }
 
 /* Form Styles */
