@@ -88,35 +88,53 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
 });
 
 // iii & iv. Greeting, date, and theme (from previous)
-function updateGreeting() {
-    const now = new Date();
-    const hours = now.getHours();
-    let greeting = hours < 12 ? 'Good morning' : hours < 18 ? 'Good afternoon' : 'Good evening';
-    
-    document.getElementById('greeting').textContent = `${greeting}!`;
-    document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Greeting & date
+    function updateGreeting() {
+        const now = new Date();
+        const hours = now.getHours();
+
+        let greeting =
+            hours < 12 ? 'Good morning' :
+            hours < 18 ? 'Good afternoon' :
+            'Good evening';
+
+        document.getElementById('greeting').textContent = `${greeting}!`;
+        document.getElementById('current-date').textContent =
+            now.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    function initTheme() {
+        const savedTheme =
+            localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light');
+
+        setTheme(savedTheme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
     });
-}
 
-const themeToggle = document.getElementById('theme-toggle');
-const html = document.documentElement;
-
-function setTheme(theme) {
-    html.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-}
-
-function initTheme() {
-    const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    setTheme(saved);
-}
-
-themeToggle.addEventListener('click', () => {
-    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    // Initialize
+    updateGreeting();
+    initTheme();
 });
-
-// Initialize everything
-updateGreeting();
-initTheme();
